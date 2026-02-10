@@ -1,0 +1,96 @@
+GET http://localhost:8080/api/albums
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function(){
+        client.assert(response.status === 204, "Response status is No Content");
+    });
+  %}
+
+###
+
+GET http://localhost:8080/api/albums/bcd06000-ab44-4c19-a6cc-5013ab319146
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function(){
+        client.assert(response.status === 404, "Response status is Not Found");
+    });
+  %}
+
+
+###
+
+POST http://localhost:8080/api/albums
+Content-Type: application/json
+Accept: application/json
+
+{
+  "albumName": "Klaus's Album",
+  "firstName": "Klaus",
+  "lastName": "Unger"
+}
+
+> {%
+    client.test("Request executed successfully", function(){
+        client.assert(response.status === 201, "Response status is Created");
+    });
+    var location = response.headers.valueOf("Location");
+    var token = location.substring(location.lastIndexOf("/")+1);
+    client.global.set("token", token);
+  %}
+
+###
+
+GET http://localhost:8080/api/albums/{{token}}
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function(){
+        client.assert(response.status === 200, "Response status is OK");
+    });
+  %}
+
+###
+
+PUT http://localhost:8080/api/albums/{{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+"albumName": "new Album",
+"firstName": "Thomas",
+"lastName": "Boigner"
+}
+
+> {%
+    client.test("Request executed successfully", function(){
+        client.assert(response.status === 200, "Response status is OK");
+    });
+  %}
+
+###
+
+PATCH http://localhost:8080/api/albums/10c07134-793a-4ed2-a187-cbefc32f9676
+Content-Type: application/json
+Accept: application/json
+
+{
+  "albumName": "Joachim's album",
+  "firstName": "Joachim",
+  "lastName": "Grueneis"
+}
+
+> {%
+    client.test("Request executed successfully", function(){
+        client.assert(response.status === 200, "Response status is OK");
+    });
+  %}
+
+###
+
+DELETE http://localhost:8080/api/albums/
+
+###
+
+DELETE http://localhost:8080/api/albums/1

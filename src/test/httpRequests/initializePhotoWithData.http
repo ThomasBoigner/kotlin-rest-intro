@@ -1,0 +1,47 @@
+POST http://localhost:8080/api/photos/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "photoName": "Klaus's Photo",
+  "photoWidth": 1920,
+  "photoHeight": 1080,
+  "albumName": "Klaus's Album",
+  "firstName": "Klaus",
+  "lastName": "Unger"
+}
+
+###
+
+POST http://localhost:8080/api/photos/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "photoName": "Joachim's Photo",
+  "photoWidth": 1920,
+  "photoHeight": 1080,
+  "albumName": "Joachim's Album",
+  "firstName": "Joachim",
+  "lastName": "Grueneis"
+}
+
+###
+
+POST http://localhost:8080/api/photos/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "photoName": "Thomas's Photo",
+  "photoWidth": 1920,
+  "photoHeight": 1080,
+  "albumName": "Thomas's Album",
+  "firstName": "Thomas",
+  "lastName": "Boigner"
+}
+
+###
+
+GET http://localhost:8080/api/photos/
+Accept: application/json
